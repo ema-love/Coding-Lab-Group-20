@@ -46,3 +46,28 @@ echo "Successfully archived to $ARCHIVE_SUBDIR/$(basename "$ARCHIVED_FILE")"
 
 touch "$SOURCE_FILE"
 echo "Created new empty $SOURCE_FILE for continued logging."
+
+# Error handling 
+# 1.Check if the log file exists
+if [ ! -f "$SOURCE_FILE" ]; then
+    echo " Error: Log file $SOURCE_FILE does not exist. Nothing to archive."
+    exit 1
+fi
+
+# 2.Check if archive directory can be created or accessed
+if ! mkdir -p "$DEST_DIR"; then
+    echo " Error: Cannot create or access archive directory $DEST_DIR."
+    exit 1
+fi
+
+# 3.Check if file move (archive) is successful
+if ! mv "$SOURCE_FILE" "$ARCHIVED_FILE"; then
+    echo " Error: Failed to move $SOURCE_FILE to $ARCHIVED_FILE."
+    exit 1
+fi
+
+# 4.Check if new empty log file can be created
+if ! touch "$SOURCE_FILE"; then
+    echo " Error: Failed to create new empty log file at $SOURCE_FILE."
+    exit 1
+fi
