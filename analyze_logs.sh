@@ -2,9 +2,9 @@
 
 ##Prints out the option statements
 echo "Select log file to analyze:"
-echo "1) Heart Rate (heart_rate.log)"
-echo "2) Temperature (temperature.log)"
-echo "3) Water Usage (water_usage.log)"
+echo "1) Heart Rate (heart_rate_log.log)"
+echo "2) Temperature (temperature_log.log)"
+echo "3) Water Usage (water_usage_log.log)"
 
 ##creates a while loop to prompt the user again in case they don't put valid input
 while true; do
@@ -15,9 +15,9 @@ while true; do
         echo " youve chosen $user_choice please proceed"
 
            case $user_choice in
-            1) LOG_FILE="hospital_data/active_logs/heart_rate.log" ;;
-            2) LOG_FILE="hospital_data/active_logs/temperature.log" ;;
-            3) LOG_FILE="hospital_data/active_logs/water_usage.log" ;;
+            1) LOG_FILE="hospital_data/active_logs/heart_rate_log.log" ;;
+            2) LOG_FILE="hospital_data/active_logs/temperature_log.log" ;;
+            3) LOG_FILE="hospital_data/active_logs/water_usage_log.log" ;;
         esac
 
         break
@@ -35,7 +35,7 @@ fi
 REPORT_CONTENT="Analysis report for $LOG_FILE\n"
 
 echo "Analysis report for $LOG_FILE"
-echo"............"
+echo "............"
 
 DEVICES=$(awk '{print $2}' "$LOG_FILE" | sort | uniq)
 for device in $DEVICES; do
@@ -56,8 +56,8 @@ for device in $DEVICES; do
 done
 
 # Save report to file
-mkdir -p reports
-echo -e "=== Analysis Report ===" > reports/analysis_report.txt
-echo "Date: $(date)" >> reports/analysis_report.txt
-echo -e "$REPORT_CONTENT" >> reports/analysis_report.txt
+mkdir -p hospital_data/reports 
+echo -e "=== Analysis Report ===" > hospital_data/reports/analysis_report.txt
+echo "Date: $(date)" >> hospital_data/reports/analysis_report.txt
+echo -e "$REPORT_CONTENT" >> hospital_data/reports/analysis_report.txt
 echo "Report saved to reports/analysis_report.txt"
