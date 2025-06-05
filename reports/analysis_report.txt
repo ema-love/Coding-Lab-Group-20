@@ -1,0 +1,14 @@
+=== Analysis Report ===
+Date: Thu 05 Jun 2025 02:48:40 AM PDT
+Analysis report for hospital_data/active_logs/heart_rate.log
+Device: 
+Total Entries: 3
+First Entry: 2025-06-01T08:00:01Z
+Last Entry: 2025-06-01T10:45:37Z
+
+Device: 
+Total Entries: 3
+First Entry: 2025-06-01T08:01:02Z
+Last Entry: 2025-06-01T10:46:15Z
+
+

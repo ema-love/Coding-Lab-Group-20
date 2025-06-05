@@ -12,9 +12,9 @@ while true; do
 
     #use of conditional or statements, we could potentially use the regex sysntax i.e if [[ "$user_choice" =~ ^[1-3]$ ]] ; then
     if [[ "$user_choice" == "1" || "$user_choice" == "2" || "$user_choice" == "3" ]]; then
-    	echo " youve chosen $user_choice please proceed"
+        echo " youve chosen $user_choice please proceed"
 
-	   case $user_choice in
+           case $user_choice in
             1) LOG_FILE="hospital_data/active_logs/heart_rate.log" ;;
             2) LOG_FILE="hospital_data/active_logs/temperature.log" ;;
             3) LOG_FILE="hospital_data/active_logs/water_usage.log" ;;
@@ -25,14 +25,14 @@ while true; do
         echo "Invalid input. Please enter a number between 1 and 3."
     fi
 done
-	
-
-
 
 if [[ ! -f "$LOG_FILE" ]]; then
         echo "log_file not found: $LOG_FILE"
         exit 1
 fi
+
+# Initialize report content
+REPORT_CONTENT="Analysis report for $LOG_FILE\n"
 
 echo "Analysis report for $LOG_FILE"
 echo"............"
@@ -40,18 +40,24 @@ echo"............"
 DEVICES=$(awk '{print $2}' "$LOG_FILE" | sort | uniq)
 for device in $DEVICES; do
         echo "Device: $devics"
-
+        REPORT_CONTENT+="Device: $devics\n"
 
         COUNT=$(grep "$device" "$LOG_FILE" | wc -l)
         echo "Total Entries: $COUNT"
-
-
-
+        REPORT_CONTENT+="Total Entries: $COUNT\n"
 
          FIRST=$(grep "$device" "$LOG_FILE" | head -1 | awk '{print $1}')
   echo "  First Entry: $FIRST"
+  REPORT_CONTENT+="First Entry: $FIRST\n"
 
   LAST=$(grep "$device" "$LOG_FILE" | tail -1 | awk '{print $1}')
   echo "  Last Entry: $LAST"
-  echo ""
+  REPORT_CONTENT+="Last Entry: $LAST\n\n"
 done
+
+# Save report to file
+mkdir -p reports
+echo -e "=== Analysis Report ===" > reports/analysis_report.txt
+echo "Date: $(date)" >> reports/analysis_report.txt
+echo -e "$REPORT_CONTENT" >> reports/analysis_report.txt
+echo "Report saved to reports/analysis_report.txt"
