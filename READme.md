@@ -27,7 +27,10 @@ If any of these steps fail, the script displays a clear error message and exits.
 
 
 
+TASK ii
 
+SECTION III (Worked on by Cindy)
+Now, the script automatically saves the analysis results to a report file while maintaining all of the original terminal output. During execution, the same device data (counts, timestamps) that are shown on the screen are collected and recorded to "reports/analysis_report.txt" along with a timestamp.  To do this, I created a variable named REPORT_CONTENT, which eventually writes the output data to a file after storing it throughout analysis.  The original terminal display remains unchanged; this merely creates a parallel record of each analysis session.
 
 
 
