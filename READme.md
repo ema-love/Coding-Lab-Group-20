@@ -27,7 +27,26 @@ If any of these steps fail, the script displays a clear error message and exits.
 
 
 
-TASK ii
+TASK II
+SECTION I(Worked on by Grace)
+This script facilitates the analysis of hospital log files by giving the user the ability to select a particular log, process the data in an intelligent manner, and save the outcomes as a report.  The three primary requirements listed below are satisfied by the script:
+1. Interactive Exercise
+The script asks the user to choose a log file to examine in a menu that appears when it runs:
+1) Heart Rate (heart_rate.log)
+2) Temperature (temperature.log)
+3) Water Usage (water_usage.log)
+Enter choice (1-3):
+It only accepts the values 1, 2, or 3 and uses a while loop to make sure the input is acceptable. It uses a case statement to allocate the relevant log file path based on the selection.
+
+SECTION II (Worked on by Mercy)
+2. Analysis Functionality
+ Following the selection of a valid log file, the script combines the commands awk, grep, sort, uniq, head, and tail to carry out the following actions:
+ >Lists every distinct device ID that was discovered in the log.
+ For every gadget:
+ >Determines how many entries (occurrences) there are.
+ > Extracts the first and last entry's timestamp (bonus feature).
+ > This makes it easier to provide a brief summary of device usage patterns and activity.
+
 
 SECTION III (Worked on by Cindy)
 Now, the script automatically saves the analysis results to a report file while maintaining all of the original terminal output. During execution, the same device data (counts, timestamps) that are shown on the screen are collected and recorded to "reports/analysis_report.txt" along with a timestamp.  To do this, I created a variable named REPORT_CONTENT, which eventually writes the output data to a file after storing it throughout analysis.  The original terminal display remains unchanged; this merely creates a parallel record of each analysis session.
