@@ -39,8 +39,8 @@ echo "............"
 
 DEVICES=$(awk '{print $2}' "$LOG_FILE" | sort | uniq)
 for device in $DEVICES; do
-        echo "Device: $devics"
-        REPORT_CONTENT+="Device: $devics\n"
+        echo "Device: $device"
+        REPORT_CONTENT+="Device: $device\n"
 
         COUNT=$(grep "$device" "$LOG_FILE" | wc -l)
         echo "Total Entries: $COUNT"
@@ -57,7 +57,7 @@ done
 
 # Save report to file
 mkdir -p hospital_data/reports 
-echo -e "=== Analysis Report ===" > hospital_data/reports/analysis_report.txt
+echo -e "=== Analysis Report ===" >> hospital_data/reports/analysis_report.txt
 echo "Date: $(date)" >> hospital_data/reports/analysis_report.txt
 echo -e "$REPORT_CONTENT" >> hospital_data/reports/analysis_report.txt
 echo "Report saved to reports/analysis_report.txt"
