@@ -33,26 +33,26 @@ esac
 #Prepare paths
 SOURCE_FILE="$LOG_DIR/$LOG_FILE"
 DEST_DIR="$ARCHIVE_DIR/$ARCHIVE_SUBDIR"
-ARCHIVED_FILE="${DEST_DIR}/${LOG_FILE%.LOG}_$TIMESTAMP.log"
+ARCHIVED_FILE="${DEST_DIR}/${LOG_FILE%.log}_$TIMESTAMP.log"
 
 #Error checks
 
 #Create archive directory if it doesn't exist
 mkdir -p "$DEST_DIR"
 
-#Archive
-mv "$SOURCE_FILE" "ARCHIVED_FILE"
-echo "Successfully archived to $ARCHIVE_SUBDIR/$(basename "$ARCHIVED_FILE")"
-
-touch "$SOURCE_FILE"
-echo "Created new empty $SOURCE_FILE for continued logging."
-
 # Error handling 
-# 1.Check if the log file exists
+# 1.Check if the log file exists before moving it
 if [ ! -f "$SOURCE_FILE" ]; then
     echo " Error: Log file $SOURCE_FILE does not exist. Nothing to archive."
     exit 1
 fi
+
+#Archive
+mv "$SOURCE_FILE" "$ARCHIVED_FILE"
+echo "Successfully archived to $ARCHIVE_SUBDIR/$(basename "$ARCHIVED_FILE")"
+
+touch "$SOURCE_FILE"
+echo "Created new empty $SOURCE_FILE for continued logging."
 
 # 2.Check if archive directory can be created or accessed
 if ! mkdir -p "$DEST_DIR"; then
